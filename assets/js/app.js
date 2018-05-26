@@ -25,6 +25,19 @@ import * as PIXI from "pixi.js"
 if(document.getElementById("game_board")) {
   let app = new PIXI.Application({width: window.innerWidth, height: window.innerHeight});
   document.body.appendChild(app.view);
-  app.renderer.backgroundColor = 0x4a5559; 
+  app.renderer.backgroundColor = 0x4a5559;
+  app.renderer.autoResize = true;
+
+  PIXI.loader
+    .add("images/tank.png")
+    .load(load_sprites);
+
+  function load_sprites(){
+    let tank = new PIXI.Sprite(
+      PIXI.loader.resources["images/tank.png"].texture
+    );
+    window.tank = tank
+    app.stage.addChild(tank);
+  }
 }
 

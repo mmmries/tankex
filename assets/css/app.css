@@ -1,4 +1,5 @@
 /* This file is for your main application css. */
 body#game_board {
-  margin: 0px;
+  padding: 0;
+  margin: 0;
 }
