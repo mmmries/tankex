@@ -1,21 +1,16 @@
-import * as PIXI from "pixi.js"
-
-let app = new PIXI.Application({width: 600, height: 600});
-
-function setup_scene() {
-  let tank = new PIXI.Sprite(
-    PIXI.loader.resources["images/tank.png"].texture
-  );
-  window.tank = tank
-  app.stage.addChild(tank);
-}
+let p = planck
 
 export default function(){
-  document.body.appendChild(app.view);
-  app.renderer.backgroundColor = 0x4a5559;
-  app.renderer.autoResize = true;
-
-  PIXI.loader
-    .add("images/tank.png")
-    .load(setup_scene)
+  p.testbed("tanks", function(testbed) {
+    let world = new p.World()
+    let tankBody = world.createBody({
+      type : 'dynamic',
+      angularDamping : 2.0,
+      linearDamping : 0.5,
+      position : p.Vec2()
+    })
+    tankBody.createFixture(p.Circle(10.0))
+    window.tankBody = tankBody
+    return world
+  })
 }
